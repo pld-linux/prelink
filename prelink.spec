@@ -6,7 +6,7 @@ Summary:	Tool to optimize relocations in object files
 Summary(pl):	Narzêdzie optymalizuj±ce relokacje w plikach objektów
 Name:		prelink
 Version:	20030808
-Release:	1
+Release:	2
 License:	GPL
 Group:		Development/Tools
 #Source0:	ftp://people.redhat.com/jakub/prelink/%{name}-%{version}.tar.bz2
@@ -14,9 +14,11 @@ Group:		Development/Tools
 Source0:	%{name}-%{version}.tar.bz2
 # Source0-md5:	e4e6e568f4194e3a9cc7bf41984c6b4a
 Patch0:		http://csociety-ftp.ecn.purdue.edu/pub/gentoo-portage/sys-devel/prelink/files/prelink-20030505-glibc231.patch
+Source1:	%{name}.conf
 BuildRequires:	glibc-devel >= 2.3
 %{!?_without_static:BuildRequires:	glibc-static >= 2.3}
-BuildRequires:	elfutils-static
+BuildRequires:	elfutils-devel
+%{!?_without_static:BuildRequires:	elfutils-static}
 BuildRequires:	libstdc++-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -51,7 +53,7 @@ install -d $RPM_BUILD_ROOT{%{_sysconfdir},/etc/rpm}
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install doc/prelink.conf $RPM_BUILD_ROOT%{_sysconfdir}
+install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}
 
 cat > $RPM_BUILD_ROOT/etc/rpm/macros.prelink <<"EOF"
 # rpm-4.1 verifies prelinked libraries using a prelink undo helper.
