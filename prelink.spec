@@ -1,28 +1,19 @@
-#
-# Conditional build:
-%bcond_without	static	# build dynamically linked binary
-#
 Summary:	Tool to optimize relocations in object files
 Summary(pl):	Narzêdzie optymalizuj±ce relokacje w plikach obiektów
 Name:		prelink
-Version:	20030808
-Release:	2
+Version:	20031029
+Release:	1
 License:	GPL
 Group:		Development/Tools
-#Source0:	ftp://people.redhat.com/jakub/prelink/%{name}-%{version}.tar.bz2
-#Ripped from:	ftp://people.redhat.com/jakub/prelink/0.3.0-2/prelink-0.3.0-2.src.rpm
-Source0:	%{name}-%{version}.tar.bz2
-# Source0-md5:	e4e6e568f4194e3a9cc7bf41984c6b4a
-Patch0:		http://csociety-ftp.ecn.purdue.edu/pub/gentoo-portage/sys-devel/prelink/files/prelink-20030505-glibc231.patch
+Source0:	ftp://people.redhat.com/jakub/prelink/%{name}-%{version}.tar.bz2
+# Source0-md5:	b23aaa4b628005d053d1f88bb8c4ee73
 Source1:	%{name}.conf
+Source2:	ftp://people.redhat.com/jakub/prelink/prelink.pdf
+# Source2-md5:	50946b654da9ccb26230cc1e00ccc53c
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	glibc-devel >= 2.3
-BuildRequires:	elfutils-devel
-%if %{with static}
 BuildRequires:	glibc-static >= 2.3
 BuildRequires:	elfutils-static
-%endif
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -38,17 +29,14 @@ uruchomienia.
 
 %prep
 %setup -q -n %{name}
-%patch0 -p1
 
 %build
-%if %{with static}
 rm -f missing
 %{__libtoolize}
 %{__aclocal} -I m4
-%endif
 %{__autoconf}
 %{__autoheader}
-%{?with_static:%{__automake}}
+%{__automake}
 %configure
 %{__make}
 
@@ -60,6 +48,7 @@ install -d $RPM_BUILD_ROOT{%{_sysconfdir},/etc/rpm}
 	DESTDIR=$RPM_BUILD_ROOT
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}
+install %{SOURCE2} .
 
 cat > $RPM_BUILD_ROOT/etc/rpm/macros.prelink <<"EOF"
 # rpm-4.1 verifies prelinked libraries using a prelink undo helper.
@@ -74,7 +63,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README THANKS TODO
+%doc AUTHORS ChangeLog NEWS README THANKS TODO prelink.pdf
 %attr(755,root,root) %{_sbindir}/*
 %{_mandir}/man?/*
 %config(noreplace) %verify(not md5 size mtime) /etc/prelink.conf
