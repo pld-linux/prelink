@@ -61,7 +61,7 @@ cat > $RPM_BUILD_ROOT/etc/rpm/macros.prelink <<"EOF"
 #       Note: The 2nd token is used as argv[0] and "library" is a
 #       placeholder that will be deleted and replaced with the appropriate
 #       library file path.
-%%__prelink_undo_cmd     /usr/sbin/prelink prelink -y library
+%%__prelink_undo_cmd	/usr/sbin/prelink prelink -y library
 EOF
 
 %clean
