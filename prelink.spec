@@ -2,7 +2,7 @@ Summary:	Tool to optimize relocations in object files
 Summary(pl):	Narzêdzie optymalizuj±ce relokacje w plikach obiektów
 Name:		prelink
 Version:	20040520
-Release:	1
+Release:	2
 License:	GPL
 Group:		Development/Tools
 Source0:	ftp://people.redhat.com/jakub/prelink/%{name}-%{version}.tar.bz2
@@ -13,8 +13,8 @@ Source2:	ftp://people.redhat.com/jakub/prelink/prelink.pdf
 Patch0:		%{name}-Makefile.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	glibc-static >= 2.3
-BuildRequires:	elfutils-static
+BuildRequires:	glibc-devel >= 2.3
+BuildRequires:	elfutils-devel
 BuildRequires:	libselinux-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
