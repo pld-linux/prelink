@@ -1,5 +1,5 @@
 --- prelink/src/Makefile.am.orig	2003-11-18 11:32:00.000000000 +0100
-+++ prelink/src/Makefile.am	2004-06-04 13:22:11.331762656 +0200
++++ prelink/src/Makefile.am	2004-06-04 13:26:54.600699232 +0200
 @@ -21,7 +21,7 @@
  		  verify.c md5.c md5.h sha.c sha.h			     \
  		  $(common_SOURCES) $(arch_SOURCES)
@@ -9,11 +9,11 @@
  
  execstack_SOURCES = execstack.c $(common_SOURCES) $(arch_SOURCES)
  
---- prelink/src/Makefile.am.orig	2003-11-18 11:32:00.000000000 +0100
-+++ prelink/src/Makefile.am	2004-06-04 13:22:11.331762656 +0200
-@@ -21,7 +21,7 @@
- 		  verify.c md5.c md5.h sha.c sha.h			     \
+--- prelink/src/Makefile.in.orig	2003-11-18 11:59:14.000000000 +0100
++++ prelink/src/Makefile.in	2004-06-04 13:26:58.384124064 +0200
+@@ -119,7 +119,7 @@
  		  $(common_SOURCES) $(arch_SOURCES)
+ 
  prelink_LDADD = @LIBGELF@
 -prelink_LDFLAGS = -all-static
 +prelink_LDFLAGS =
