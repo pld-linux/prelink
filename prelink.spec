@@ -1,7 +1,7 @@
 #
 # Conditional build:
 # _without_static	- build dynamically linked binary
-
+#
 Summary:	Tool to optimize relocations in object files
 Summary(pl):	Narzêdzie optymalizuj±ce relokacje w plikach obiektów
 Name:		prelink
@@ -15,11 +15,14 @@ Source0:	%{name}-%{version}.tar.bz2
 # Source0-md5:	e4e6e568f4194e3a9cc7bf41984c6b4a
 Patch0:		http://csociety-ftp.ecn.purdue.edu/pub/gentoo-portage/sys-devel/prelink/files/prelink-20030505-glibc231.patch
 Source1:	%{name}.conf
+BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	glibc-devel >= 2.3
 %{!?_without_static:BuildRequires:	glibc-static >= 2.3}
 BuildRequires:	elfutils-devel
 %{!?_without_static:BuildRequires:	elfutils-static}
 BuildRequires:	libstdc++-devel
+BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -72,5 +75,5 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS ChangeLog NEWS README THANKS TODO
 %attr(755,root,root) %{_sbindir}/*
 %{_mandir}/man?/*
-%attr(644,root,root) %config(noreplace) %verify(not md5 size mtime) /etc/prelink.conf
+%config(noreplace) %verify(not md5 size mtime) /etc/prelink.conf
 /etc/rpm/macros.prelink
