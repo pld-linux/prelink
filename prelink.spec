@@ -16,6 +16,7 @@ BuildRequires:	glibc-static >= 2.3
 BuildRequires:	elfutils-static
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
+Conflicts:	paxtest
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -64,6 +65,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README THANKS TODO prelink.pdf
+%attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_sbindir}/*
 %{_mandir}/man?/*
 %config(noreplace) %verify(not md5 size mtime) /etc/prelink.conf
