@@ -8,6 +8,7 @@ Group:		Development/Tools
 Source0:	ftp://people.redhat.com/jakub/prelink/%{name}-%{version}.tar.bz2
 BuildRequires:	glibc-devel >= 2.3
 BuildRequires:	elfutils-static
+BuildRequires:	libstdc++-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
