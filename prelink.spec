@@ -1,6 +1,6 @@
 #
 # Conditional build:
-# _without_static	- build dynamically linked binary
+%bcond_without	static	# build dynamically linked binary
 #
 Summary:	Tool to optimize relocations in object files
 Summary(pl):	Narzêdzie optymalizuj±ce relokacje w plikach obiektów
@@ -18,9 +18,11 @@ Source1:	%{name}.conf
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	glibc-devel >= 2.3
-%{!?_without_static:BuildRequires:	glibc-static >= 2.3}
 BuildRequires:	elfutils-devel
-%{!?_without_static:BuildRequires:	elfutils-static}
+%if %{with static}
+BuildRequires:	glibc-static >= 2.3
+BuildRequires:	elfutils-static
+%endif
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -39,14 +41,14 @@ uruchomienia.
 %patch0 -p1
 
 %build
-%if 0%{!?_without_static:1}
+%if %{with static}
 rm -f missing
 %{__libtoolize}
 %{__aclocal} -I m4
 %endif
 %{__autoconf}
 %{__autoheader}
-%{!?_without_static:%{__automake}}
+%{?with_static:%{__automake}}
 %configure
 %{__make}
 
