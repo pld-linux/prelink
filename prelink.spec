@@ -1,8 +1,12 @@
+#
+# Conditional build:
+%bcond_without	selinux		# build without SELinux support
+#
 Summary:	Tool to optimize relocations in object files
 Summary(pl):	Narzêdzie optymalizuj±ce relokacje w plikach obiektów
 Name:		prelink
 Version:	20040520
-Release:	2
+Release:	3
 License:	GPL
 Group:		Development/Tools
 Source0:	ftp://people.redhat.com/jakub/prelink/%{name}-%{version}.tar.bz2
@@ -15,7 +19,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	glibc-devel >= 2.3
 BuildRequires:	elfutils-devel
-BuildRequires:	libselinux-devel
+%{?with_selinux:BuildRequires:	libselinux-devel}
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 Requires:	glibc >= 2.3.4-0.20040722
@@ -43,7 +47,9 @@ rm -f missing
 %{__autoheader}
 %{__automake}
 %configure \
-	--enable-static=no
+	--enable-static=no \
+	%{!?with_selinux:ac_cv_lib_selinux_is_selinux_enabled=no} \
+
 %{__make}
 
 %install
