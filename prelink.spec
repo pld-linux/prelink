@@ -18,6 +18,7 @@ BuildRequires:	elfutils-devel
 BuildRequires:	libselinux-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
+Requires:	glibc >= 2.3.4-0.20040722
 Conflicts:	paxtest
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
