@@ -1,13 +1,19 @@
+#
+# Conditional build:
+# _without_static	- build dynamically linked binary
+
 Summary:	Tool to optimize relocations in object files
 Summary(pl):	Narzêdzie optymalizuj±ce relokacje w plikach objektów
 Name:		prelink
-Version:	20021002
-Release:	3
+Version:	20030522
+Release:	1
 License:	GPL
 Group:		Development/Tools
 Source0:	ftp://people.redhat.com/jakub/prelink/%{name}-%{version}.tar.bz2
-# Source0-md5:	f6c8692c309009838ba45c6da38c8684
+# Source0-md5:	07de27b8e677f787193592847296581f
+Patch0:		http://csociety-ftp.ecn.purdue.edu/pub/gentoo-portage/sys-devel/prelink/files/prelink-20030505-glibc231.patch
 BuildRequires:	glibc-devel >= 2.3
+%{!?_without_static:BuildRequires:	glibc-static >= 2.3}
 BuildRequires:	elfutils-static
 BuildRequires:	libstdc++-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -22,9 +28,18 @@ Dziêki temu program jest szybciej linkowany w momencie uruchomienia.
 
 %prep
 %setup -q -n %{name}
+%patch0 -p1
 
 %build
-%configure2_13
+%if 0%{!?_without_static:1}
+rm -f missing
+%{__libtoolize}
+%{__aclocal} -I m4
+%endif
+%{__autoconf}
+%{__autoheader}
+%{!?_without_static:%{__automake}}
+%configure
 %{__make}
 
 %install
