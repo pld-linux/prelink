@@ -28,7 +28,8 @@ ones. This allows faster run-time dynamic linking.
 
 %description -l pl
 Ten program zamienia relokacje w plikach objektów na mniej wymagaj±ce.
-Dziêki temu program jest szybciej linkowany w momencie uruchomienia.
+Dziêki temu program jest szybciej konsolidowany w momencie
+uruchomienia.
 
 %prep
 %setup -q -n %{name}
