@@ -6,6 +6,7 @@ Release:	3
 License:	GPL
 Group:		Development/Tools
 Source0:	ftp://people.redhat.com/jakub/prelink/%{name}-%{version}.tar.bz2
+# Source0-md5:	f6c8692c309009838ba45c6da38c8684
 BuildRequires:	glibc-devel >= 2.3
 BuildRequires:	elfutils-static
 BuildRequires:	libstdc++-devel
