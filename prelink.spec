@@ -27,9 +27,12 @@ Dziêki temu program jest szybciej linkowany w momencie uruchomienia.
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT%{_sysconfdir}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
+
+install doc/prelink.conf $RPM_BUILD_ROOT%{_sysconfdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -39,3 +42,4 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS ChangeLog NEWS README THANKS TODO
 %attr(755,root,root) %{_sbindir}/*
 %{_mandir}/man?/*
+%attr(644,root,root) %config(noreplace) %verify(not md5 size mtime) /etc/prelink.conf
