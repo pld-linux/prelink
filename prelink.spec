@@ -10,6 +10,7 @@ Source0:	ftp://people.redhat.com/jakub/prelink/%{name}-%{version}.tar.bz2
 Source1:	%{name}.conf
 Source2:	ftp://people.redhat.com/jakub/prelink/prelink.pdf
 # Source2-md5:	50946b654da9ccb26230cc1e00ccc53c
+Patch0:		%{name}-Makefile.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	glibc-static >= 2.3
@@ -31,6 +32,7 @@ uruchomienia.
 
 %prep
 %setup -q -n %{name}
+%patch0 -p1
 
 %build
 rm -f missing
@@ -39,7 +41,8 @@ rm -f missing
 %{__autoconf}
 %{__autoheader}
 %{__automake}
-%configure
+%configure \
+	--enable-static=no
 %{__make}
 
 %install
