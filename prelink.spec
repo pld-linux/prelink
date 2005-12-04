@@ -6,19 +6,19 @@ Summary:	Tool to optimize relocations in object files
 Summary(pl):	Narzêdzie optymalizuj±ce relokacje w plikach obiektów
 Name:		prelink
 Version:	20050610
-Release:	1	
+Release:	1
 License:	GPL
 Group:		Development/Tools
 Source0:	ftp://people.redhat.com/jakub/prelink/%{name}-%{version}.tar.bz2
 # Source0-md5:	1c24413eda902a8cfd581a84372b02ab
 Source1:	%{name}.conf
-Source2:	ftp://people.redhat.com/jakub/prelink/prelink.pdf
+Source2:	ftp://people.redhat.com/jakub/prelink/%{name}.pdf
 # Source2-md5:	50946b654da9ccb26230cc1e00ccc53c
 Patch0:		%{name}-Makefile.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	glibc-devel >= 2.3
 BuildRequires:	elfutils-devel
+BuildRequires:	glibc-devel >= 2.3
 %{?with_selinux:BuildRequires:	libselinux-devel}
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
@@ -79,5 +79,5 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_sbindir}/*
 %{_mandir}/man?/*
-%config(noreplace) %verify(not md5 size mtime) /etc/prelink.conf
-/etc/rpm/macros.prelink
+%config(noreplace) %verify(not md5 mtime size) /etc/prelink.conf
+/etc/rpm/rpm/macros.prelink
