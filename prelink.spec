@@ -80,4 +80,4 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_sbindir}/*
 %{_mandir}/man?/*
 %config(noreplace) %verify(not md5 mtime size) /etc/prelink.conf
-/etc/rpm/rpm/macros.prelink
+/etc/rpm/macros.prelink
