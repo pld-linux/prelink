@@ -102,7 +102,7 @@ touch /var/lib/misc/prelink.force
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_sbindir}/*
 %{_mandir}/man?/*
-%attr(644,root,root) %verify(not md5 mtime size) %ghost %config(missingok,noreplace) /var/lib/misc/prelink.full
-%attr(644,root,root) %verify(not md5 mtime size) %ghost %config(missingok,noreplace) /var/lib/misc/prelink.quick
-%attr(644,root,root) %verify(not md5 mtime size) %ghost %config(missingok,noreplace) /var/lib/misc/prelink.force
-%attr(644,root,root) %verify(not md5 mtime size) %ghost %config(missingok,noreplace) /var/log/prelink.log
+%verify(not md5 mtime size) %ghost %config(missingok,noreplace) /var/lib/misc/prelink.full
+%verify(not md5 mtime size) %ghost %config(missingok,noreplace) /var/lib/misc/prelink.quick
+%verify(not md5 mtime size) %ghost %config(missingok,noreplace) /var/lib/misc/prelink.force
+%verify(not md5 mtime size) %ghost %config(missingok,noreplace) /var/log/prelink.log
