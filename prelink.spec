@@ -6,12 +6,12 @@
 Summary:	Tool to optimize relocations in object files
 Summary(pl):	Narzêdzie optymalizuj±ce relokacje w plikach obiektów
 Name:		prelink
-Version:	20050610
-Release:	2
+Version:	20060213
+Release:	1
 License:	GPL
 Group:		Development/Tools
 Source0:	http://people.redhat.com/jakub/prelink/%{name}-%{version}.tar.bz2
-# Source0-md5:	1c24413eda902a8cfd581a84372b02ab
+# Source0-md5:	a3ee7d324ecdf2f1a7b8b95c01ee75fa
 Source1:	%{name}.conf
 Source2:	http://people.redhat.com/jakub/prelink/%{name}.pdf
 # Source2-md5:	50946b654da9ccb26230cc1e00ccc53c
