@@ -6,18 +6,23 @@
 Summary:	Tool to optimize relocations in object files
 Summary(pl.UTF-8):	Narzędzie optymalizujące relokacje w plikach obiektów
 Name:		prelink
-Version:	20060213
-Release:	2
+Version:	20071009
+Release:	1
 License:	GPL
 Group:		Development/Tools
-Source0:	http://people.redhat.com/jakub/prelink/%{name}-%{version}.tar.bz2
-# Source0-md5:	a3ee7d324ecdf2f1a7b8b95c01ee75fa
+#Source0:	http://people.redhat.com/jakub/prelink/%{name}-%{version}.tar.bz2
+Source0:	ftp://ftp.debian.org/debian/pool/main/p/prelink/%{name}_0.0.%{version}.orig.tar.gz
+# Source0-md5:	6617a6681f4e5e3d8ddc48955d73d7ab
 Source1:	%{name}.conf
 Source2:	http://people.redhat.com/jakub/prelink/%{name}.pdf
 # Source2-md5:	50946b654da9ccb26230cc1e00ccc53c
 Source3:	%{name}.cron
 Source4:	%{name}.sysconfig
 Patch0:		%{name}-Makefile.patch
+Patch1:		%{name}-fsync.patch
+Patch2:		%{name}-init.patch
+Patch3:		%{name}-md5sha.patch
+Patch4:		%{name}-prelink.h.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	elfutils-devel
@@ -39,8 +44,12 @@ Dzięki temu program jest szybciej konsolidowany w momencie
 uruchomienia.
 
 %prep
-%setup -q -n %{name}
+%setup -q -n %{name}-0.0.%{version}
 %patch0 -p1
+%patch1 -p1
+%patch2 -p1
+%patch3 -p1
+%patch4 -p1
 
 %build
 %{__libtoolize}
