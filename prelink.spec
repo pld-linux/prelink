@@ -7,7 +7,7 @@ Summary:	Tool to optimize relocations in object files
 Summary(pl.UTF-8):	Narzędzie optymalizujące relokacje w plikach obiektów
 Name:		prelink
 Version:	20071009
-Release:	1
+Release:	2
 License:	GPL
 Group:		Development/Tools
 #Source0:	http://people.redhat.com/jakub/prelink/%{name}-%{version}.tar.bz2
@@ -79,11 +79,11 @@ install %{SOURCE2} .
 cp -a %{SOURCE3} $RPM_BUILD_ROOT/etc/cron.daily/prelink
 cp -a %{SOURCE4} $RPM_BUILD_ROOT/etc/sysconfig/prelink
 
-install -d $RPM_BUILD_ROOT/var/{lib/misc,log}
+install -d $RPM_BUILD_ROOT/var/{lib/misc,log/prelink}
 touch $RPM_BUILD_ROOT/var/lib/misc/prelink.full
 touch $RPM_BUILD_ROOT/var/lib/misc/prelink.quick
 touch $RPM_BUILD_ROOT/var/lib/misc/prelink.force
-touch $RPM_BUILD_ROOT/var/log/prelink.log
+touch $RPM_BUILD_ROOT/var/log/prelink/prelink.log
 
 cat > $RPM_BUILD_ROOT/etc/rpm/macros.prelink <<'EOF'
 # rpm-4.1 verifies prelinked libraries using a prelink undo helper.
@@ -113,4 +113,5 @@ touch /var/lib/misc/prelink.force
 %verify(not md5 mtime size) %ghost %config(missingok,noreplace) /var/lib/misc/prelink.full
 %verify(not md5 mtime size) %ghost %config(missingok,noreplace) /var/lib/misc/prelink.quick
 %verify(not md5 mtime size) %ghost %config(missingok,noreplace) /var/lib/misc/prelink.force
-%verify(not md5 mtime size) %ghost %config(missingok,noreplace) /var/log/prelink.log
+%dir /var/log/prelink
+%verify(not md5 mtime size) %ghost %config(missingok,noreplace) /var/log/prelink/prelink.log
