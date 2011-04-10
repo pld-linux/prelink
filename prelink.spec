@@ -6,13 +6,12 @@
 Summary:	Tool to optimize relocations in object files
 Summary(pl.UTF-8):	Narzędzie optymalizujące relokacje w plikach obiektów
 Name:		prelink
-Version:	20090925
+Version:	20100106
 Release:	1
 License:	GPL
 Group:		Development/Tools
-#Source0:	http://people.redhat.com/jakub/prelink/%{name}-%{version}.tar.bz2
-Source0:	ftp://ftp.debian.org/debian/pool/main/p/prelink/%{name}_0.0.%{version}.orig.tar.gz
-# Source0-md5:	ed90412ad4ee7f5b5e8fff3d6649e49b
+Source0:	http://people.redhat.com/jakub/prelink/%{name}-%{version}.tar.bz2
+# Source0-md5:	56e2a1b5a478795352bf6e4d2bc6e0ab
 Source1:	%{name}.conf
 Source2:	http://people.redhat.com/jakub/prelink/%{name}.pdf
 # Source2-md5:	50946b654da9ccb26230cc1e00ccc53c
@@ -44,7 +43,7 @@ Dzięki temu program jest szybciej konsolidowany w momencie
 uruchomienia.
 
 %prep
-%setup -q -n %{name}-0.0.%{version}
+%setup -q -n %{name}
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
