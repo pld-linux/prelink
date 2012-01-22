@@ -6,13 +6,13 @@
 Summary:	Tool to optimize relocations in object files
 Summary(pl.UTF-8):	Narzędzie optymalizujące relokacje w plikach obiektów
 Name:		prelink
-Version:	20110511
+Version:	20111012
 Release:	1
 License:	GPL
 Group:		Development/Tools
 # Source0:	http://people.redhat.com/jakub/prelink/%{name}-%{version}.tar.bz2
 Source0:	http://distfiles.gentoo.org/distfiles/%{name}-%{version}.tar.bz2
-# Source0-md5:	d5635655127fab5104f852d4eb8574c6
+# Source0-md5:	f5aaf347432d677c293e5e3399ba4fdf
 Source1:	%{name}.conf
 Source2:	http://people.redhat.com/jakub/prelink/%{name}.pdf
 # Source2-md5:	50946b654da9ccb26230cc1e00ccc53c
@@ -61,7 +61,8 @@ uruchomienia.
 	--enable-static=no \
 	%{!?with_selinux:ac_cv_lib_selinux_is_selinux_enabled=no} \
 
-%{__make}
+%{__make} \
+	CLFAGS="%{rpmcflags} -D_LARGEFILE64_SOURCE"
 %if %{with tests}
 %{__make} -C testsuite check-harder
 %{__make} -C testsuite check-cycle
