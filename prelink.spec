@@ -1,18 +1,18 @@
 #
 # Conditional build:
-%bcond_without	selinux		# build without SELinux support
-%bcond_with	tests		# perform tests (break right now, missing deps?)
+%bcond_without	selinux		# SELinux support
+%bcond_without	tests		# tests after build
 #
 Summary:	Tool to optimize relocations in object files
 Summary(pl.UTF-8):	Narzędzie optymalizujące relokacje w plikach obiektów
 Name:		prelink
-Version:	20111012
-Release:	2
-License:	GPL
+Version:	20130503
+Release:	1
+License:	GPL v2+
 Group:		Development/Tools
-# Source0:	http://people.redhat.com/jakub/prelink/%{name}-%{version}.tar.bz2
-Source0:	http://distfiles.gentoo.org/distfiles/%{name}-%{version}.tar.bz2
-# Source0-md5:	f5aaf347432d677c293e5e3399ba4fdf
+# backup:	http://distfiles.gentoo.org/distfiles/%{name}-%{version}.tar.bz2
+Source0:	http://people.redhat.com/jakub/prelink/%{name}-%{version}.tar.bz2
+# Source0-md5:	4cab1571718a9b25665bd025069a02c7
 Source1:	%{name}.conf
 Source2:	http://people.redhat.com/jakub/prelink/%{name}.pdf
 # Source2-md5:	50946b654da9ccb26230cc1e00ccc53c
@@ -23,8 +23,9 @@ Patch1:		%{name}-fsync.patch
 Patch2:		%{name}-init.patch
 Patch3:		%{name}-md5sha.patch
 Patch4:		%{name}-prelink.h.patch
-BuildRequires:	autoconf
-BuildRequires:	automake
+Patch5:		%{name}-tests.patch
+BuildRequires:	autoconf >= 2.13
+BuildRequires:	automake >= 1.4
 BuildRequires:	elfutils-devel
 BuildRequires:	glibc-devel >= 2.3
 %{?with_selinux:BuildRequires:	libselinux-devel}
@@ -50,6 +51,7 @@ uruchomienia.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 %build
 %{__libtoolize}
@@ -108,9 +110,10 @@ touch /var/lib/misc/prelink.force
 %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/prelink
 /etc/rpm/macros.prelink
 %attr(755,root,root) /etc/cron.daily/prelink
-%attr(755,root,root) %{_bindir}/*
-%attr(755,root,root) %{_sbindir}/*
-%{_mandir}/man?/*
+%attr(755,root,root) %{_bindir}/execstack
+%attr(755,root,root) %{_sbindir}/prelink
+%{_mandir}/man8/execstack.8*
+%{_mandir}/man8/prelink.8*
 %verify(not md5 mtime size) %ghost %config(missingok,noreplace) /var/lib/misc/prelink.full
 %verify(not md5 mtime size) %ghost %config(missingok,noreplace) /var/lib/misc/prelink.quick
 %verify(not md5 mtime size) %ghost %config(missingok,noreplace) /var/lib/misc/prelink.force

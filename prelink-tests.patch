@@ -1,0 +1,11 @@
+--- prelink/testsuite/Makefile.am.orig	2013-05-03 09:58:11.000000000 +0200
++++ prelink/testsuite/Makefile.am	2013-10-20 17:15:03.396474517 +0200
+@@ -21,7 +21,7 @@
+ 	PRELINK="../src/prelink -c ./prelink.conf -C ./prelink.cache --ld-library-path=. --dynamic-linker=`echo ./ld*.so.*[0-9]`" \
+ 	CC="$(CC) $(LINKOPTS)" CCLINK="$(CC) -Wl,--dynamic-linker=`echo ./ld*.so.*[0-9]`" \
+ 	CXX="$(CXX) $(LINKOPTS)" CXXLINK="$(CXX) -Wl,--dynamic-linker=`echo ./ld*.so.*[0-9]`" \
+-	$(SHELL)
++	SHELL=$(SHELL)
+ 
+ extra_DIST = $(TESTS) functions.sh
+ 
