@@ -7,7 +7,7 @@ Summary:	Tool to optimize relocations in object files
 Summary(pl.UTF-8):	Narzędzie optymalizujące relokacje w plikach obiektów
 Name:		prelink
 Version:	20130503
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		Development/Tools
 # backup:	http://distfiles.gentoo.org/distfiles/%{name}-%{version}.tar.bz2
